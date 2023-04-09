@@ -31,15 +31,36 @@ export default function App() {
         return dies;
     }
 
+    function handleRoll() {
+        setDiceInfo(prevInfo => {
+            return (
+                prevInfo.map(die => {
+                    if (die.held) {
+                        return die
+                    } else {
+                        return {
+                            ...die,
+                            value: (Math.floor(Math.random()*6) + 1)
+                        }
+                    }
+                })
+            )
 
+        })
+
+    }
 
     const dieElements = createDies();
+
     return (
         <main>
             <div className="game">
+                <h1>Tenzies</h1>
+                <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
                 <div className="dieholder">
                     {dieElements}
                 </div>
+                <button className='rolldice' onClick={handleRoll} >Roll Dice</button>
             </div>
         </main>
     )

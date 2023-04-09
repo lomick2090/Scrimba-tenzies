@@ -26,6 +26,16 @@ main {
     align-items: center;
 }
 
+.game > h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+    margin-top:5px;
+}
+
+.game > p {
+    width: 40vw;
+}
+
 .die {
     width: min(8vw, 85px);
     height: min(8vw, 85px);
@@ -42,6 +52,7 @@ main {
 .die.held {
     background-color: #59E391;
 }
+
 .dieholder {
     width: min(75vw, 600px);
     height: min(75vh, 220px);
@@ -50,4 +61,14 @@ main {
     align-content: center;
     grid-template:  min(8vw, 85px)  min(8vw, 85px) / repeat(5,  min(8vw, 85px));
     gap: 25px;
+}
+
+.rolldice {
+    background-color: #5035FF;
+    color:white;
+    font-size: min(7vw, 36px);
+    padding: min(3vw, 16px);
+    border-radius: 4px;
+    margin-top: min(12vw, 30px);
+    margin-bottom: 5px;
 }
