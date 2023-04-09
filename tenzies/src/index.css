@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;700&display=swap');
+
 body {
     margin:0;
+    font-family: 'Karla', sans-serif;
 }
 
 
@@ -13,8 +16,38 @@ main {
 }
 
 .game {
-    background-color: white;
-    width: 80vw;;
+    background-color: #F5F5F5;
+    width: 80vw;
     height: 80vh;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.die {
+    width: min(8vw, 85px);
+    height: min(8vw, 85px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.51);
+    border-radius: 3px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: min(7vw, 36px);
+    background-color: white;
+}
+
+.die.held {
+    background-color: #59E391;
+}
+.dieholder {
+    width: min(75vw, 600px);
+    height: min(75vh, 220px);
+    display:grid;
+    justify-content: center;
+    align-content: center;
+    grid-template:  min(8vw, 85px)  min(8vw, 85px) / repeat(5,  min(8vw, 85px));
+    gap: 25px;
 }
