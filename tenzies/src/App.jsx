@@ -13,7 +13,14 @@ export default function App() {
         return tempDice
     }
 
+
     const [diceInfo, setDiceInfo] = React.useState(initializeDice())
+    const [rollNumber, setRollNumber] = React.useState(0)
+    const [highScore, setHighScore] = React.useState(() => {return (localStorage.getItem('highscore') || 100)})
+    
+    React.useEffect(() => {
+        checkWin()
+    }, [diceInfo])
 
     function toggleHold(index) {
         setDiceInfo(prevDiceInfo => {
@@ -29,6 +36,23 @@ export default function App() {
             dies.push(<Die key={i} id={i} value={diceInfo[i].value} held={diceInfo[i].held} toggleHold={toggleHold}/>)
         }
         return dies;
+    }
+
+    function checkWin() {
+        let check = diceInfo[0].value;
+        let win = true
+        diceInfo.forEach(dice => {
+            if (dice.value != check) {
+                win = false
+            }
+        })
+        if (win == true) {
+            alert('you win')
+            if (rollNumber < highScore) {
+                setHighScore(rollNumber)
+                localStorage.setItem('highscore', rollNumber)
+            }
+        }
     }
 
     function handleRoll() {
@@ -48,6 +72,8 @@ export default function App() {
 
         })
 
+        setRollNumber(prevRollNumber => prevRollNumber + 1)
+        
     }
 
     const dieElements = createDies();
@@ -57,6 +83,18 @@ export default function App() {
             <div className="game">
                 <h1>Tenzies</h1>
                 <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+                <div className="rollinfo">
+                    <div>
+                        <h3>
+                            # Of Rolls: <strong>{rollNumber}</strong>
+                        </h3>
+                    </div>
+                    <div>
+                        <h3>
+                            High Score: <strong>{highScore}</strong>
+                        </h3>
+                    </div>
+                </div>
                 <div className="dieholder">
                     {dieElements}
                 </div>

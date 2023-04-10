@@ -15,6 +15,20 @@ main {
     align-items: center;
 }
 
+.rollinfo {
+    position:absolute;
+    display: flex;
+    width: 80vw;
+    justify-content: space-between;
+    top:0px;
+    /* padding: 0px 3vw 0px 3vw; */
+}
+
+.rollinfo > div {
+    text-align: center;
+    color: white;
+}
+
 .game {
     background-color: #F5F5F5;
     width: 80vw;
@@ -24,16 +38,19 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* position: relative; */
 }
 
 .game > h1 {
     font-size: 45px;
     margin-bottom: 10px;
     margin-top:5px;
+    color:#2B283A;
 }
 
 .game > p {
     width: 40vw;
+    color: #4A4E74;
 }
 
 .die {
