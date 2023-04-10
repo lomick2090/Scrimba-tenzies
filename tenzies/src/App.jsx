@@ -1,5 +1,6 @@
 import React from 'react'
 import Die from './components/Die'
+import Confetti from 'react-confetti'
 
 export default function App() {
     function initializeDice() {
@@ -17,9 +18,12 @@ export default function App() {
     const [diceInfo, setDiceInfo] = React.useState(initializeDice())
     const [rollNumber, setRollNumber] = React.useState(0)
     const [highScore, setHighScore] = React.useState(() => {return (localStorage.getItem('highscore') || 100)})
+    const [tenzies, setTenzies] = React.useState(false)
     
     React.useEffect(() => {
-        checkWin()
+        if (!tenzies){
+            checkWin()
+        }
     }, [diceInfo])
 
     function toggleHold(index) {
@@ -28,6 +32,12 @@ export default function App() {
             infoCopy[index].held = !infoCopy[index].held;
             return infoCopy;
         })
+    }
+
+    function restartGame() {
+        setDiceInfo(initializeDice);
+        setRollNumber(0);
+        setTenzies(false);
     }
 
     function createDies() {
@@ -52,6 +62,7 @@ export default function App() {
                 setHighScore(rollNumber)
                 localStorage.setItem('highscore', rollNumber)
             }
+            setTenzies(true);
         }
     }
 
@@ -80,8 +91,9 @@ export default function App() {
 
     return (
         <main>
+            {tenzies && <Confetti />}
             <div className="game">
-                <h1>Tenzies</h1>
+                <h1>{tenzies ? 'You Win!' : 'Tenzies'}</h1>
                 <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
                 <div className="rollinfo">
                     <div>
@@ -98,7 +110,7 @@ export default function App() {
                 <div className="dieholder">
                     {dieElements}
                 </div>
-                <button className='rolldice' onClick={handleRoll} >Roll Dice</button>
+                <button className='rolldice' onClick={(tenzies) ? restartGame : handleRoll} >{(tenzies) ? 'New Game' : 'Roll Dice'}</button>
             </div>
         </main>
     )

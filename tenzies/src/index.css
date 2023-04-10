@@ -97,3 +97,9 @@ main {
 .die:hover, .rolldice:hover {
     cursor: pointer;
 }
+
+.win {
+    position: absolute;
+    top:5px;
+    margin-top:0px;
+}
